@@ -1,19 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Item_img_url } from './item_img_url.entity';
 
 @Entity()
 export class Item {
-  @PrimaryGeneratedColumn()
-  id: string;
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
   @Column()
-  product_name: string;
+  item_name: string;
 
   @Column()
-  product_price: number;
+  item_price: number;
 
   @Column()
-  product_desc: string;
+  item_desc: string;
 
-  @Column()
-  product_img_url: string;
+  @OneToMany(() => Item_img_url, (item_img_url) => item_img_url.item)
+  item_img_urls: Item_img_url[];
 }
