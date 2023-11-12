@@ -16,8 +16,8 @@ export class ItemsService {
     return 'This action adds a new item';
   }
 
-  findAll() {
-    return `This action returns all items`;
+  getAll(): Promise<Item[]> {
+    return this.itemRepository.find({ relations: ['item_img_urls'] });
   }
 
   findOne(id: number) {

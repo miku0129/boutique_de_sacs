@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
+import { Item } from './entities/item.entity';
 
 @Controller('items')
 export class ItemsController {
@@ -13,9 +22,8 @@ export class ItemsController {
   }
 
   @Get()
-  findAll() {
-    // return this.itemsService.findAll();
-    return "yes!"
+  getAll(): Promise<Item[]> {
+    return this.itemsService.getAll();
   }
 
   @Get(':id')
