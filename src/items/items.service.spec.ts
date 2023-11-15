@@ -34,9 +34,12 @@ describe('ItemsService', () => {
 
   describe('createItem', () => {
     it('should create a new item record and return that', async () => {
-      expect(
-        await service.createItem('sample', 100, 'This is a sample'),
-      ).toEqual({
+      const newItem = await service.createItem({
+        item_name: 'sample',
+        item_price: 100,
+        item_desc: 'This is a sample',
+      });
+      expect(newItem).toEqual({
         id: expect.any(Number),
         item_name: 'sample',
         item_price: 100,

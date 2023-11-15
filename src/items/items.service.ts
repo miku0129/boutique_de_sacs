@@ -12,12 +12,8 @@ export class ItemsService {
     @InjectRepository(Item) private itemRepository: Repository<Item>,
   ) {}
 
-  createItem(item_name: string, item_price: number, item_desc: string) {
-    const newItem = this.itemRepository.create({
-      item_name,
-      item_price,
-      item_desc,
-    });
+  createItem(createItemDto: CreateItemDto): Promise<Item> {
+    const newItem = this.itemRepository.create(createItemDto);
     return this.itemRepository.save(newItem);
   }
 

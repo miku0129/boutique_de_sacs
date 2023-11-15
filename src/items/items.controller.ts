@@ -16,10 +16,10 @@ import { Item } from './entities/item.entity';
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
-  // @Post()
-  // create(@Body() createItemDto: CreateItemDto) {
-  //   return this.itemsService.createItem(createItemDto);
-  // }
+  @Post()
+  create(@Body() createItemDto: CreateItemDto) {
+    return this.itemsService.createItem(createItemDto);
+  }
 
   // @Get()
   // getAll(): Promise<Item[]> {
