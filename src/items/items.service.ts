@@ -12,8 +12,13 @@ export class ItemsService {
     @InjectRepository(Item) private itemRepository: Repository<Item>,
   ) {}
 
-  create(createItemDto: CreateItemDto) {
-    return 'This action adds a new item';
+  createItem(item_name: string, item_price: number, item_desc: string) {
+    const newItem = this.itemRepository.create({
+      item_name,
+      item_price,
+      item_desc,
+    });
+    return this.itemRepository.save(newItem);
   }
 
   getAll(): Promise<Item[]> {

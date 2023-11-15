@@ -16,28 +16,28 @@ import { Item } from './entities/item.entity';
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
-  @Post()
-  create(@Body() createItemDto: CreateItemDto) {
-    return this.itemsService.create(createItemDto);
-  }
+  // @Post()
+  // create(@Body() createItemDto: CreateItemDto) {
+  //   return this.itemsService.createItem(createItemDto);
+  // }
 
-  @Get()
-  getAll(): Promise<Item[]> {
-    return this.itemsService.getAll();
-  }
+  // @Get()
+  // getAll(): Promise<Item[]> {
+  //   return this.itemsService.getAll();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itemsService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.itemsService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
-    return this.itemsService.update(+id, updateItemDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
+  //   return this.itemsService.update(+id, updateItemDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itemsService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.itemsService.remove(+id);
+  // }
 }
