@@ -32,6 +32,7 @@ describe('ItemsController', () => {
       items.push(newItem);
       return newItem;
     }),
+    getAll: jest.fn(() => items),
   };
 
   beforeEach(async () => {
@@ -59,5 +60,14 @@ describe('ItemsController', () => {
       item_price: dto.item_price,
       item_desc: dto.item_desc,
     });
+  });
+
+  it('should find all items', async () => {
+    controller.create(dto);
+    controller.create(dto);
+    controller.create(dto);
+
+    const result = await controller.getAll();
+    expect(result.length).toBe(3);
   });
 });

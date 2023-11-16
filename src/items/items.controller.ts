@@ -18,15 +18,13 @@ export class ItemsController {
 
   @Post()
   async create(@Body() createItemDto: CreateItemDto): Promise<Item> {
-    console.log('Hello in the service!!');
-
     return this.itemsService.create(createItemDto);
   }
 
-  // @Get()
-  // getAll(): Promise<Item[]> {
-  //   return this.itemsService.getAll();
-  // }
+  @Get()
+  getAll(): Promise<Item[]> {
+    return this.itemsService.getAll();
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {

@@ -14,6 +14,7 @@ describe('ItemsService', () => {
       items.push(newItem);
       return Promise.resolve(newItem);
     }),
+    find: jest.fn().mockImplementation(() => items),
   };
 
   beforeEach(async () => {
@@ -45,6 +46,23 @@ describe('ItemsService', () => {
         item_price: 100,
         item_desc: 'This is a sample',
       });
+    });
+  });
+
+  describe('getAll', () => {
+    it('should return all items', async () => {
+      await service.create({
+        item_name: 'sample1',
+        item_price: 100,
+        item_desc: 'This is a sample1',
+      });
+      await service.create({
+        item_name: 'sample2',
+        item_price: 200,
+        item_desc: 'This is a sample2',
+      });
+
+      expect((await service.getAll()).length).toBe(2);
     });
   });
 });
