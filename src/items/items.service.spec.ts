@@ -34,7 +34,7 @@ describe('ItemsService', () => {
 
   describe('createItem', () => {
     it('should create a new item record and return that', async () => {
-      const newItem = await service.createItem({
+      const newItem = await service.create({
         item_name: 'sample',
         item_price: 100,
         item_desc: 'This is a sample',

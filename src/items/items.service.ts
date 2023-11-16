@@ -12,7 +12,7 @@ export class ItemsService {
     @InjectRepository(Item) private itemRepository: Repository<Item>,
   ) {}
 
-  createItem(createItemDto: CreateItemDto): Promise<Item> {
+  create(createItemDto: CreateItemDto): Promise<Item> {
     const newItem = this.itemRepository.create(createItemDto);
     return this.itemRepository.save(newItem);
   }

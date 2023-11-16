@@ -17,8 +17,10 @@ export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
   @Post()
-  create(@Body() createItemDto: CreateItemDto) {
-    return this.itemsService.createItem(createItemDto);
+  async create(@Body() createItemDto: CreateItemDto): Promise<Item> {
+    console.log('Hello in the service!!');
+
+    return this.itemsService.create(createItemDto);
   }
 
   // @Get()
