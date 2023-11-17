@@ -15,6 +15,9 @@ describe('ItemsService', () => {
       return Promise.resolve(newItem);
     }),
     find: jest.fn().mockImplementation(() => items),
+    findOneOrFail: jest.fn().mockImplementation(({ where: { id: id } }) => {
+      return items.find((item) => item.id === id);
+    }),
   };
 
   beforeEach(async () => {
@@ -63,6 +66,28 @@ describe('ItemsService', () => {
       });
 
       expect((await service.getAll()).length).toBe(2);
+    });
+  });
+
+  describe('findOne', () => {
+    it('should return a item by id', async () => {
+      const item1 = await service.create({
+        item_name: 'sample1',
+        item_price: 100,
+        item_desc: 'This is a sample1',
+      });
+      const item2 = await service.create({
+        item_name: 'sample2',
+        item_price: 200,
+        item_desc: 'This is a sample2',
+      });
+
+      expect(await service.findOne(item1.id)).toEqual({
+        id: expect.any(Number),
+        item_name: 'sample1',
+        item_price: 100,
+        item_desc: 'This is a sample1',
+      });
     });
   });
 });

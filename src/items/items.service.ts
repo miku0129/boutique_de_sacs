@@ -21,8 +21,15 @@ export class ItemsService {
     return this.itemRepository.find({ relations: ['item_img_urls'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} item`;
+  async findOne(id: number): Promise<Item> {
+    try {
+      const item = await this.itemRepository.findOneOrFail({
+        where: { id: id },
+      });
+      return item;
+    } catch (err) {
+      throw err;
+    }
   }
 
   update(id: number, updateItemDto: UpdateItemDto) {

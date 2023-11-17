@@ -12,6 +12,7 @@ describe('ItemsController', () => {
     item_price: 100,
     item_desc: 'This is a sample',
   };
+
   interface Item {
     id: number;
     item_name: string;
@@ -33,6 +34,9 @@ describe('ItemsController', () => {
       return newItem;
     }),
     getAll: jest.fn(() => items),
+    findOne: jest.fn().mockImplementation((id) => {
+      return items.find((item) => item.id === id);
+    }),
   };
 
   beforeEach(async () => {
@@ -53,21 +57,35 @@ describe('ItemsController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should create a item', async () => {
-    expect(await controller.create(dto)).toEqual({
-      id: expect.any(Number),
-      item_name: dto.item_name,
-      item_price: dto.item_price,
-      item_desc: dto.item_desc,
+  describe('create', () => {
+    it('should create a item', async () => {
+      expect(await controller.create(dto)).toEqual({
+        id: expect.any(Number),
+        item_name: dto.item_name,
+        item_price: dto.item_price,
+        item_desc: dto.item_desc,
+      });
     });
   });
 
-  it('should find all items', async () => {
-    controller.create(dto);
-    controller.create(dto);
-    controller.create(dto);
+  describe('getAll', () => {
+    it('should get all items', async () => {
+      controller.create(dto);
+      controller.create(dto);
+      controller.create(dto);
 
-    const result = await controller.getAll();
-    expect(result.length).toBe(3);
+      const result = await controller.getAll();
+      expect(result.length).toBe(3);
+    });
+  });
+
+  describe('findOne', () => {
+    it('should find a item by id', async () => {
+      const item1 = await controller.create(dto);
+      const item2 = await controller.create({ id: 2, ...dto });
+
+      const result = await controller.findOne(String(item1.id));
+      expect(result.id).toEqual(item1.id);
+    });
   });
 });
