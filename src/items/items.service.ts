@@ -25,6 +25,7 @@ export class ItemsService {
     try {
       const item = await this.itemRepository.findOneOrFail({
         where: { id: id },
+        relations: ['item_img_urls'],
       });
       return item;
     } catch (err) {
@@ -32,11 +33,17 @@ export class ItemsService {
     }
   }
 
-  update(id: number, updateItemDto: UpdateItemDto) {
-    return `This action updates a #${id} item`;
+  async update(id: number, updateItemDto: UpdateItemDto): Promise<Item> {
+    let item = await this.itemRepository.findOneOrFail({
+      where: { id: id },
+      relations: ['item_img_urls'],
+    });
+    item = { ...item, ...updateItemDto };
+    console.log('item', item);
+    return this.itemRepository.save(item);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} item`;
-  }
+  // remove(id: number) {
+  //   return `This action removes a #${id} item`;
+  // }
 }

@@ -31,10 +31,10 @@ export class ItemsController {
     return this.itemsService.findOne(+id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
-  //   return this.itemsService.update(+id, updateItemDto);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
+    return this.itemsService.update(+id, updateItemDto);
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {

@@ -24,7 +24,10 @@ describe('ItemsService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ItemsService,
-        { provide: getRepositoryToken(Item), useValue: mockItemRepository },
+        {
+          provide: getRepositoryToken(Item),
+          useValue: mockItemRepository,
+        },
       ],
     }).compile();
 
@@ -82,11 +85,37 @@ describe('ItemsService', () => {
         item_desc: 'This is a sample2',
       });
 
-      expect(await service.findOne(item1.id)).toEqual({
+      const foundItem = await service.findOne(item1.id);
+      expect(foundItem).toEqual({
         id: expect.any(Number),
         item_name: 'sample1',
         item_price: 100,
         item_desc: 'This is a sample1',
+      });
+    });
+  });
+
+  describe('updateItem', () => {
+    it('should update a item', async () => {
+      const item1 = await service.create({
+        item_name: 'sample',
+        item_price: 100,
+        item_desc: 'This is a sample',
+      });
+
+      const updatedinfo = {
+        ...item1,
+        item_price: 600,
+        item_img_urls: [],
+      };
+      const updatedItem1 = await service.update(item1.id, updatedinfo);
+
+      expect(updatedItem1).toEqual({
+        id: expect.any(Number),
+        item_name: 'sample',
+        item_price: 600,
+        item_desc: 'This is a sample',
+        item_img_urls: [],
       });
     });
   });

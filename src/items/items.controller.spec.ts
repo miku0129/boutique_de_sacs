@@ -6,11 +6,15 @@ describe('ItemsController', () => {
   let controller: ItemsController;
   let items = [];
 
-  const dto = {
+  const create_dto = {
     id: 1,
     item_name: 'sample',
     item_price: 100,
     item_desc: 'This is a sample',
+  };
+  const update_dto = {
+    ...create_dto,
+    item_name: 'updated dto',
   };
 
   interface Item {
@@ -25,10 +29,10 @@ describe('ItemsController', () => {
   };
 
   const mockItemService = {
-    create: jest.fn((dto): Item => {
+    create: jest.fn((create_dto): Item => {
       const newItem = {
         id: getUniqueNum(),
-        ...dto,
+        ...create_dto,
       };
       items.push(newItem);
       return newItem;
@@ -36,6 +40,10 @@ describe('ItemsController', () => {
     getAll: jest.fn(() => items),
     findOne: jest.fn().mockImplementation((id) => {
       return items.find((item) => item.id === id);
+    }),
+    update: jest.fn().mockImplementation((id, update_dto) => {
+      const founditem = items.find((item) => item.id === id);
+      return { ...founditem, ...update_dto };
     }),
   };
 
@@ -59,20 +67,20 @@ describe('ItemsController', () => {
 
   describe('create', () => {
     it('should create a item', async () => {
-      expect(await controller.create(dto)).toEqual({
+      expect(await controller.create(create_dto)).toEqual({
         id: expect.any(Number),
-        item_name: dto.item_name,
-        item_price: dto.item_price,
-        item_desc: dto.item_desc,
+        item_name: create_dto.item_name,
+        item_price: create_dto.item_price,
+        item_desc: create_dto.item_desc,
       });
     });
   });
 
   describe('getAll', () => {
     it('should get all items', async () => {
-      controller.create(dto);
-      controller.create(dto);
-      controller.create(dto);
+      controller.create(create_dto);
+      controller.create(create_dto);
+      controller.create(create_dto);
 
       const result = await controller.getAll();
       expect(result.length).toBe(3);
@@ -81,11 +89,27 @@ describe('ItemsController', () => {
 
   describe('findOne', () => {
     it('should find a item by id', async () => {
-      const item1 = await controller.create(dto);
-      const item2 = await controller.create({ id: 2, ...dto });
+      const item1 = await controller.create(create_dto);
+      const item2 = await controller.create({ id: 2, ...create_dto });
 
       const result = await controller.findOne(String(item1.id));
       expect(result.id).toEqual(item1.id);
+    });
+  });
+
+  describe('update', () => {
+    it('should update a item by id', async () => {
+      const item1 = await controller.create(create_dto);
+      const item2 = await controller.create({ id: 2, ...create_dto });
+
+      const updated_item = await controller.update(
+        String(item1.id),
+        update_dto,
+      );
+
+      expect(updated_item.item_price).toEqual(update_dto.item_price);
+
+      // expect(updated_item.item_img_urls).toEqual(update_dto.item_img_urls);
     });
   });
 });
