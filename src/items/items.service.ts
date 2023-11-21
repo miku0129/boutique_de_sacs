@@ -39,7 +39,6 @@ export class ItemsService {
       relations: ['item_img_urls'],
     });
     item = { ...item, ...updateItemDto };
-    console.log('item', item);
     return this.itemRepository.save(item);
   }
 

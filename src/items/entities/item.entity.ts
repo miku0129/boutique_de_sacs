@@ -15,6 +15,8 @@ export class Item {
   @Column()
   item_desc: string;
 
-  @OneToMany(() => Item_img_url, (item_img_url) => item_img_url.item)
+  @OneToMany(() => Item_img_url, (item_img_url) => item_img_url.item, {
+    cascade: true,
+  })
   item_img_urls: Item_img_url[];
 }
