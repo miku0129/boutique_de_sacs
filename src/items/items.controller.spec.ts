@@ -45,6 +45,11 @@ describe('ItemsController', () => {
       const founditem = items.find((item) => item.id === id);
       return { ...founditem, ...update_dto };
     }),
+    remove: jest.fn().mockImplementation((id) => {
+      const item = items.find((item) => item.id === id);
+      items = items.filter((user) => user.id !== id);
+      return item;
+    }),
   };
 
   beforeEach(async () => {
@@ -108,8 +113,14 @@ describe('ItemsController', () => {
       );
 
       expect(updated_item.item_price).toEqual(update_dto.item_price);
+    });
+  });
 
-      // expect(updated_item.item_img_urls).toEqual(update_dto.item_img_urls);
+  describe('remove', () => {
+    it('should remove a item by id', async () => {
+      const item1 = await controller.create(create_dto);
+      const removedItem = await controller.remove(String(create_dto.id));
+      expect(removedItem.id).toEqual(item1.id);
     });
   });
 });

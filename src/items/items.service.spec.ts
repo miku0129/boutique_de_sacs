@@ -18,6 +18,11 @@ describe('ItemsService', () => {
     findOneOrFail: jest.fn().mockImplementation(({ where: { id: id } }) => {
       return items.find((item) => item.id === id);
     }),
+    remove: jest.fn().mockImplementation((id) => {
+      const item = items.find((item) => item.id === id);
+      items = items.filter((user) => user.id !== id);
+      return item;
+    }),
   };
 
   beforeEach(async () => {
@@ -117,6 +122,18 @@ describe('ItemsService', () => {
         item_desc: 'This is a sample',
         item_img_urls: [],
       });
+    });
+  });
+
+  describe('removeItem', () => {
+    it('should remove a item', async () => {
+      const item1 = await service.create({
+        item_name: 'sample',
+        item_price: 100,
+        item_desc: 'This is a sample',
+      });
+
+      expect(await service.remove(item1.id)).toEqual(item1);
     });
   });
 });

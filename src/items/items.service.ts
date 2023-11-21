@@ -42,7 +42,12 @@ export class ItemsService {
     return this.itemRepository.save(item);
   }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} item`;
-  // }
+  async remove(id: number): Promise<Item> {
+    const item = await this.itemRepository.findOneOrFail({
+      where: { id: id },
+    });
+    console.log('removed item', item);
+    this.itemRepository.remove(item);
+    return item;
+  }
 }
