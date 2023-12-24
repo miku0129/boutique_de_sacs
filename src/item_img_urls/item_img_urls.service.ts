@@ -2,25 +2,52 @@ import { Injectable } from '@nestjs/common';
 import { CreateItemImgUrlDto } from './dto/create-item_img_url.dto';
 import { UpdateItemImgUrlDto } from './dto/update-item_img_url.dto';
 
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Item_img_url } from './entities/item_img_url.entity';
+
 @Injectable()
 export class ItemImgUrlsService {
-  create(createItemImgUrlDto: CreateItemImgUrlDto) {
-    return 'This action adds a new itemImgUrl';
+  constructor(
+    @InjectRepository(Item_img_url)
+    private itemImgUrlRepository: Repository<Item_img_url>,
+  ) {}
+  create(createItemImgUrlDto: CreateItemImgUrlDto): Promise<Item_img_url> {
+    const newItemImgUrl = this.itemImgUrlRepository.create(createItemImgUrlDto);
+    return this.itemImgUrlRepository.save(newItemImgUrl);
   }
 
-  findAll() {
-    return `This action returns all itemImgUrls`;
+  findAll(): Promise<Item_img_url[]> {
+    return this.itemImgUrlRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} itemImgUrl`;
+  async findOne(id: number): Promise<Item_img_url> {
+    try {
+      const item_img_url = await this.itemImgUrlRepository.findOneOrFail({
+        where: { id: id },
+      });
+      return item_img_url;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  update(id: number, updateItemImgUrlDto: UpdateItemImgUrlDto) {
-    return `This action updates a #${id} itemImgUrl`;
+  async update(
+    id: number,
+    updateItemImgUrlDto: UpdateItemImgUrlDto,
+  ): Promise<Item_img_url> {
+    let item_img_url = await this.itemImgUrlRepository.findOneOrFail({
+      where: { id: id },
+    });
+    item_img_url = { ...item_img_url, ...updateItemImgUrlDto };
+    return this.itemImgUrlRepository.save(item_img_url);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} itemImgUrl`;
+  async remove(id: number): Promise<Item_img_url> {
+    const item_img_url = await this.itemImgUrlRepository.findOneOrFail({
+      where: { id: id },
+    });
+    this.itemImgUrlRepository.remove(item_img_url);
+    return item_img_url;
   }
 }
