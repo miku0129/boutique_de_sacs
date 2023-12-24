@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ItemsService } from './items.service';
-import { ItemsController } from './items.controller';
+import { ItemImgUrlsService } from './item_img_urls.service';
+import { ItemImgUrlsController } from './item_img_urls.controller';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import typeorm from '../config/typeorm';
-import { Item } from './entities/item.entity';
-import { Item_img_url } from 'src/item_img_urls/entities/item_img_url.entity';
+import { Item_img_url } from './entities/item_img_url.entity';
+import { Item } from 'src/items/entities/item.entity';
 
 @Module({
   imports: [
@@ -21,7 +21,7 @@ import { Item_img_url } from 'src/item_img_urls/entities/item_img_url.entity';
     }),
     TypeOrmModule.forFeature([Item, Item_img_url]),
   ],
-  controllers: [ItemsController],
-  providers: [ItemsService],
+  controllers: [ItemImgUrlsController],
+  providers: [ItemImgUrlsService],
 })
-export class ItemsModule {}
+export class ItemImgUrlsModule {}

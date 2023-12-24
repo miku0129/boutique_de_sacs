@@ -1,19 +1,29 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Item_img_url } from './item_img_url.entity';
+import { Item_img_url } from '../../item_img_urls/entities/item_img_url.entity';
+
+// type Sac = string;
+// type Panier = string;
+// type Other = string;
 
 @Entity()
 export class Item {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
-  item_name: string;
+  @Column('varchar')
+  name: string;
 
-  @Column()
-  item_price: number;
+  @Column('varchar', { nullable: true })
+  desc: string;
 
-  @Column()
-  item_desc: string;
+  @Column('varchar')
+  category: Sac | Panier | Other;
+
+  @Column('int')
+  price: number;
+
+  @Column('varchar', { nullable: true })
+  payment_link: string;
 
   @OneToMany(() => Item_img_url, (item_img_url) => item_img_url.item, {
     cascade: true,

@@ -17,7 +17,7 @@ export class ItemsService {
     return this.itemRepository.save(newItem);
   }
 
-  getAll(): Promise<Item[]> {
+  findAll(): Promise<Item[]> {
     return this.itemRepository.find({ relations: ['item_img_urls'] });
   }
 

@@ -19,5 +19,6 @@
     "noFallthroughCasesInSwitch": false,
 
     "rootDir": "."
-  }
+  },
+  "include": ["src", "@types/index.d.ts"]
 }

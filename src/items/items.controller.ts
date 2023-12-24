@@ -22,8 +22,8 @@ export class ItemsController {
   }
 
   @Get()
-  getAll(): Promise<Item[]> {
-    return this.itemsService.getAll();
+  findAll(): Promise<Item[]> {
+    return this.itemsService.findAll();
   }
 
   @Get(':id')

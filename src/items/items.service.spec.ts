@@ -45,82 +45,151 @@ describe('ItemsService', () => {
   });
 
   describe('createItem', () => {
-    it('should create a new item record and return that', async () => {
+    it('should create a new item with desc and return that', async () => {
       const newItem = await service.create({
-        item_name: 'sample',
-        item_price: 100,
-        item_desc: 'This is a sample',
+        name: 'sample',
+        desc: 'This is sample item',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
       });
       expect(newItem).toEqual({
         id: expect.any(Number),
-        item_name: 'sample',
-        item_price: 100,
-        item_desc: 'This is a sample',
+        name: 'sample',
+        desc: 'This is sample item',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
+      });
+    });
+    it('should create a new item without desc and return that', async () => {
+      const newItem = await service.create({
+        name: 'sample',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
+      });
+      expect(newItem).toEqual({
+        id: expect.any(Number),
+        name: 'sample',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
       });
     });
   });
 
-  describe('getAll', () => {
+  describe('findAll', () => {
     it('should return all items', async () => {
       await service.create({
-        item_name: 'sample1',
-        item_price: 100,
-        item_desc: 'This is a sample1',
+        name: 'sample',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
       });
       await service.create({
-        item_name: 'sample2',
-        item_price: 200,
-        item_desc: 'This is a sample2',
+        name: 'sample',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
       });
 
-      expect((await service.getAll()).length).toBe(2);
+      expect((await service.findAll()).length).toBe(2);
     });
   });
 
   describe('findOne', () => {
     it('should return a item by id', async () => {
       const item1 = await service.create({
-        item_name: 'sample1',
-        item_price: 100,
-        item_desc: 'This is a sample1',
+        name: 'sample1',
+        desc: 'This is sample1 item',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
       });
       const item2 = await service.create({
-        item_name: 'sample2',
-        item_price: 200,
-        item_desc: 'This is a sample2',
+        name: 'sample2',
+        desc: 'This is sample2 item',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
       });
 
       const foundItem = await service.findOne(item1.id);
       expect(foundItem).toEqual({
         id: expect.any(Number),
-        item_name: 'sample1',
-        item_price: 100,
-        item_desc: 'This is a sample1',
+        name: 'sample1',
+        desc: 'This is sample1 item',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
       });
     });
   });
 
   describe('updateItem', () => {
-    it('should update a item', async () => {
+    it('should update a item which have description', async () => {
       const item1 = await service.create({
-        item_name: 'sample',
-        item_price: 100,
-        item_desc: 'This is a sample',
+        name: 'sample1',
+        desc: 'This is sample1 item',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
       });
-
       const updatedinfo = {
         ...item1,
-        item_price: 600,
-        item_img_urls: [],
+        price: 600,
       };
       const updatedItem1 = await service.update(item1.id, updatedinfo);
-
       expect(updatedItem1).toEqual({
         id: expect.any(Number),
-        item_name: 'sample',
-        item_price: 600,
-        item_desc: 'This is a sample',
-        item_img_urls: [],
+        name: 'sample1',
+        desc: 'This is sample1 item',
+        category: 'sac',
+        price: 600,
+        payment_link: 'url-for-payment',
+      });
+    });
+
+    it('should update a item which doesnt have description', async () => {
+      const item1 = await service.create({
+        name: 'sample1',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
+      });
+      const updatedinfo = {
+        ...item1,
+        price: 600,
+      };
+      const updatedItem1 = await service.update(item1.id, updatedinfo);
+      expect(updatedItem1).toEqual({
+        id: expect.any(Number),
+        name: 'sample1',
+        category: 'sac',
+        price: 600,
+        payment_link: 'url-for-payment',
+      });
+    });
+
+    it('should update a item_img_urls', async () => {
+      const item1 = await service.create({
+        name: 'sample1',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
+      });
+      const updatedinfo = {
+        ...item1,
+        price: 600,
+      };
+      const updatedItem1 = await service.update(item1.id, updatedinfo);
+      expect(updatedItem1).toEqual({
+        id: expect.any(Number),
+        name: 'sample1',
+        category: 'sac',
+        price: 600,
+        payment_link: 'url-for-payment',
       });
     });
   });
@@ -128,9 +197,11 @@ describe('ItemsService', () => {
   describe('removeItem', () => {
     it('should remove a item', async () => {
       const item1 = await service.create({
-        item_name: 'sample',
-        item_price: 100,
-        item_desc: 'This is a sample',
+        name: 'sample1',
+        desc: 'This is sample1 item',
+        category: 'sac',
+        price: 100,
+        payment_link: 'url-for-payment',
       });
 
       expect(await service.remove(item1.id)).toEqual(item1);
