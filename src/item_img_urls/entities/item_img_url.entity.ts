@@ -18,7 +18,10 @@ export class Item_img_url {
   @Column('boolean')
   is_main: boolean;
 
-  @ManyToOne(() => Item, (item) => item.item_img_urls, { eager: true })
+  @ManyToOne(() => Item, (item) => item.item_img_urls, {
+    eager: true,
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   item: Item;
 }

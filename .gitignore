@@ -35,3 +35,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 backup_dockerf
+/src/migrations

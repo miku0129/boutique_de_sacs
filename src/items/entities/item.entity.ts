@@ -1,10 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Item_img_url } from '../../item_img_urls/entities/item_img_url.entity';
 
-// type Sac = string;
-// type Panier = string;
-// type Other = string;
-
 @Entity()
 export class Item {
   @PrimaryGeneratedColumn('increment')
