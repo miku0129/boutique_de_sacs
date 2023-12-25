@@ -6,7 +6,7 @@ export class UpdateItemDto extends PartialType(CreateItemDto) {
   id: number;
   name: string;
   desc?: string;
-  category: string;
+  category: Category;
   price: number;
   payment_link: string;
   item_img_urls?: Item_img_url[];

@@ -46,7 +46,6 @@ export class ItemsService {
     const item = await this.itemRepository.findOneOrFail({
       where: { id: id },
     });
-    console.log('removed item', item);
     this.itemRepository.remove(item);
     return item;
   }

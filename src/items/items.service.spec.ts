@@ -44,8 +44,8 @@ describe('ItemsService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('createItem', () => {
-    it('should create a new item with desc and return that', async () => {
+  describe('create', () => {
+    it('should create a new item(sac) with desc and return that', async () => {
       const newItem = await service.create({
         name: 'sample',
         desc: 'This is sample item',
@@ -62,6 +62,41 @@ describe('ItemsService', () => {
         payment_link: 'url-for-payment',
       });
     });
+    it('should create a new item(panier) with desc and return that', async () => {
+      const newItem = await service.create({
+        name: 'sample',
+        desc: 'This is sample item',
+        category: 'panier',
+        price: 100,
+        payment_link: 'url-for-payment',
+      });
+      expect(newItem).toEqual({
+        id: expect.any(Number),
+        name: 'sample',
+        desc: 'This is sample item',
+        category: 'panier',
+        price: 100,
+        payment_link: 'url-for-payment',
+      });
+    });
+    it('should create a new item(autre) with desc and return that', async () => {
+      const newItem = await service.create({
+        name: 'sample',
+        desc: 'This is sample item',
+        category: 'autre',
+        price: 100,
+        payment_link: 'url-for-payment',
+      });
+      expect(newItem).toEqual({
+        id: expect.any(Number),
+        name: 'sample',
+        desc: 'This is sample item',
+        category: 'autre',
+        price: 100,
+        payment_link: 'url-for-payment',
+      });
+    });
+
     it('should create a new item without desc and return that', async () => {
       const newItem = await service.create({
         name: 'sample',
