@@ -24,7 +24,7 @@ export class Item {
   @Column('int')
   price: number;
 
-  @Column('bool')
+  @Column('boolean')
   is_available: boolean;
 
   @OneToMany(() => Item_img_url, (item_img_url) => item_img_url.item, {
