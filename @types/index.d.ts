@@ -1,5 +1,5 @@
-type Sac = 'sac';
-type Panier = 'panier';
+type Sacs = 'sacs';
+type Vannerie = 'vannerie';
 type Other = 'autre';
 
-type Category = Sac | Panier | Other;
+type Category = Sacs | Vannerie | Other;

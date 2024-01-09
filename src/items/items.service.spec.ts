@@ -45,11 +45,11 @@ describe('ItemsService', () => {
   });
 
   describe('create', () => {
-    it('should create a new item(sac) with desc and return that', async () => {
+    it('should create a new item(sacs) with desc and return that', async () => {
       const newItem = await service.create({
         name: 'sample',
         desc: 'This is sample item',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -57,16 +57,16 @@ describe('ItemsService', () => {
         id: expect.any(Number),
         name: 'sample',
         desc: 'This is sample item',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
     });
-    it('should create a new item(panier) with desc and return that', async () => {
+    it('should create a new item(vannerie) with desc and return that', async () => {
       const newItem = await service.create({
         name: 'sample',
         desc: 'This is sample item',
-        category: 'panier',
+        category: 'vannerie',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -74,7 +74,7 @@ describe('ItemsService', () => {
         id: expect.any(Number),
         name: 'sample',
         desc: 'This is sample item',
-        category: 'panier',
+        category: 'vannerie',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -100,14 +100,14 @@ describe('ItemsService', () => {
     it('should create a new item without desc and return that', async () => {
       const newItem = await service.create({
         name: 'sample',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
       expect(newItem).toEqual({
         id: expect.any(Number),
         name: 'sample',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -118,13 +118,13 @@ describe('ItemsService', () => {
     it('should return all items', async () => {
       await service.create({
         name: 'sample',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
       await service.create({
         name: 'sample',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -138,14 +138,14 @@ describe('ItemsService', () => {
       const item1 = await service.create({
         name: 'sample1',
         desc: 'This is sample1 item',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
       const item2 = await service.create({
         name: 'sample2',
         desc: 'This is sample2 item',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -155,7 +155,7 @@ describe('ItemsService', () => {
         id: expect.any(Number),
         name: 'sample1',
         desc: 'This is sample1 item',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -167,7 +167,7 @@ describe('ItemsService', () => {
       const item1 = await service.create({
         name: 'sample1',
         desc: 'This is sample1 item',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -180,7 +180,7 @@ describe('ItemsService', () => {
         id: expect.any(Number),
         name: 'sample1',
         desc: 'This is sample1 item',
-        category: 'sac',
+        category: 'sacs',
         price: 600,
         payment_link: 'url-for-payment',
       });
@@ -189,7 +189,7 @@ describe('ItemsService', () => {
     it('should update a item which doesnt have description', async () => {
       const item1 = await service.create({
         name: 'sample1',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -201,7 +201,7 @@ describe('ItemsService', () => {
       expect(updatedItem1).toEqual({
         id: expect.any(Number),
         name: 'sample1',
-        category: 'sac',
+        category: 'sacs',
         price: 600,
         payment_link: 'url-for-payment',
       });
@@ -210,7 +210,7 @@ describe('ItemsService', () => {
     it('should update a item_img_urls', async () => {
       const item1 = await service.create({
         name: 'sample1',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });
@@ -222,7 +222,7 @@ describe('ItemsService', () => {
       expect(updatedItem1).toEqual({
         id: expect.any(Number),
         name: 'sample1',
-        category: 'sac',
+        category: 'sacs',
         price: 600,
         payment_link: 'url-for-payment',
       });
@@ -234,7 +234,7 @@ describe('ItemsService', () => {
       const item1 = await service.create({
         name: 'sample1',
         desc: 'This is sample1 item',
-        category: 'sac',
+        category: 'sacs',
         price: 100,
         payment_link: 'url-for-payment',
       });

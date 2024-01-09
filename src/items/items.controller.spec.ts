@@ -15,7 +15,7 @@ describe('ItemsController', () => {
     payment_link: string;
   }
 
-  const create_category: Sac = 'sac';
+  const create_category: Sacs = 'sacs';
   const create_dto = {
     id: 1,
     name: 'sample name',
@@ -25,7 +25,7 @@ describe('ItemsController', () => {
     payment_link: 'payment-link',
   };
 
-  const updated_category: Panier = 'panier';
+  const updated_category: Vannerie = 'vannerie';
   const update_dto = {
     ...create_dto,
     name: 'updated name',
