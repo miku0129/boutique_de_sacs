@@ -7,7 +7,7 @@ export class Item {
   id: number;
 
   @Column('varchar')
-  itemIdNum: string;
+  item_id_number: string;
 
   @Column('varchar')
   name: string;
