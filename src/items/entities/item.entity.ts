@@ -7,19 +7,25 @@ export class Item {
   id: number;
 
   @Column('varchar')
+  item_id_number: string;
+
+  @Column('varchar')
   name: string;
 
   @Column('varchar', { nullable: true })
-  desc: string;
+  desc_1: string;
+
+  @Column('varchar', { nullable: true })
+  desc_2: string;
 
   @Column('varchar')
-  category: Sac | Panier | Other;
+  category: Sacs | Vannerie | Other;
 
   @Column('int')
   price: number;
 
-  @Column('varchar', { nullable: true })
-  payment_link: string;
+  @Column('boolean')
+  is_available: boolean;
 
   @OneToMany(() => Item_img_url, (item_img_url) => item_img_url.item, {
     cascade: true,
