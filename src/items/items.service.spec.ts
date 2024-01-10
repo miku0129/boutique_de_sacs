@@ -123,7 +123,7 @@ describe('ItemsService', () => {
   });
 
   describe('findAll', () => {
-    xit('should return all items', async () => {
+    it('should return all items', async () => {
       await service.create({
         item_id_number: '777',
         name: 'sample',
@@ -146,7 +146,7 @@ describe('ItemsService', () => {
   });
 
   describe('findOne', () => {
-    xit('should return a item by id', async () => {
+    it('should return a item by id', async () => {
       const item1 = await service.create({
         item_id_number: '777',
         name: 'sample',
@@ -178,7 +178,7 @@ describe('ItemsService', () => {
   });
 
   describe('updateItem', () => {
-    xit('should update a item which have description', async () => {
+    it('should update a item which have description', async () => {
       const item1 = await service.create({
         item_id_number: '778',
         name: 'sample',
@@ -228,7 +228,7 @@ describe('ItemsService', () => {
   });
 
   describe('removeItem', () => {
-    xit('should remove a item', async () => {
+    it('should remove a item', async () => {
       const item1 = await service.create({
         item_id_number: '778',
         name: 'sample',
